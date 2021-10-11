@@ -38,20 +38,6 @@ class Prediction(db.Model):
 def man():
    return render_template('index.html')
 
-@app.route('/predict',methods=['POST'])
-def home():
-   data1=request.form['Class']
-   data2=request.form['age']
-   data3=request.form['sib']
-   data4=request.form['pch']
-   data5=request.form['Gender']
-   arr=np.array([[data1,data2,data3,data4,data5]])
-   pred = model.predict(arr)
-   return render_template('result.html',title='Result',data=pred)
-
-@app.route('/result')
-def sample():
-   return render_template('result.html')
 
 @app.route('/process',methods=['POST'])
 def process():
