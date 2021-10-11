@@ -1,0 +1,13 @@
+To connect machine learning model to frontend using flask
+Flask - web micro framework
+Django - web application framework similar to MVC model
+Built on Jinga2 template rendering machine and  werkzerg WSGI Webserver Gateway Interface toolkit
+
+app.py contains routes for each web page
+model.py containes machine learning algorithm implementation
+static folder - html,javascript,css,images
+It is difficult to train model everytime so trained model can be saved using pickle and joblib
+We can use pickle,joblib for saving model object
+pickle file - to save the model
+pickle is used to serialize and deserialize python objects like list,tuples,dict to binary values
+joblib - serializing object using numpy array

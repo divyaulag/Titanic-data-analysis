@@ -1,0 +1,31 @@
+ <script>
+    $(document).ready(function() {
+    $('form').on('submit', function(event) {
+        $.ajax({
+            data : {
+                Class : $('[name=Class]').val(),
+                age : $('[name=age]').val(),
+                sib : $('[name=sib]').val(),
+                pch : $('[name=pch]').val(),
+                Gender : $('[name=Gender]').val()
+            },
+            type : 'POST',
+            url : '/process'
+        })
+        .done(function(data) {
+            if (data.state=='Died'){
+            $('#output1').show();
+            $('#die').text(data.state).show();
+            }
+            else
+            {
+            $('#output2').show();
+            $('#sur').text(data.state).show();
+            }
+            $('#image').hide();
+            $('.container').hide();
+        });
+        event.preventDefault();
+      });
+    });
+</script>

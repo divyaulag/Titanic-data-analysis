@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <link rel="stylesheet" href="{{url_for('static',filename='style.css')}}"/>
+    <script>
+    $(document).ready(function() {
+    $('form').on('submit', function(event) {
+        $.ajax({
+            data : {
+                Class : $('[name=Class]').val(),
+                age : $('[name=age]').val(),
+                sib : $('[name=sib]').val(),
+                pch : $('[name=pch]').val(),
+                Gender : $('[name=Gender]').val()
+            },
+            type : 'POST',
+            url : '/process'
+        })
+        .done(function(data) {
+            if (data.state=='Died'){
+            $('#output1').show();
+            $('#die').text(data.state).show();
+            }
+            else
+            {
+            $('#output2').show();
+            $('#sur').text(data.state).show();
+            }
+            $('#image').hide();
+            $('.container').hide();
+        });
+        event.preventDefault();
+      });
+    });
+</script>
+</head>
+<body>
+   <H1 id="h1">Survival Prediction</H1>
+      <div id="output1">
+          <img class="img" src="{{url_for('static',filename='danger.png')}}">
+          <h1 align="center" id="h">Oops!</h1>
+          <h1 id="die" align="center"></h1>
+      </div>
+   <div id="output2">
+       <img class="img" src="{{url_for('static',filename='survive2.jpg')}}">
+       <h1 align="center" id="h">Hurray!</h1>
+       <h1 id="sur" align="center"></h1>
+   </div>
+
+      <img id="image" src="{{url_for('static',filename='ship.jpg')}}">
+
+     <div class="container">
+     <form><br>
+         <label id="lable" for="gender">Gender</label><br>
+         <input class="radio" type="radio" id="Male" name="Gender" value=1 checked="checked">
+         <label id="lable" for="Male">Male</label>
+          <input class="radio" type="radio" id="female" name="Gender" value=0>
+          <label id="lable" for="Female">female</label><br><br>
+         <label id='lable' for="age">Age</label><br>
+         <input id='box' type="number" name="age" placeholder="Enter your age" required><br><br>
+         <label id="lable" for="class">Class</label><br>
+         <input class="radio" type="radio" id="1class" name="Class" value=1 checked="checked">
+        <label id="lable" for="Male">1st Class</label>
+         <input class="radio" type="radio" id="2class" name="Class" value=2>
+        <label id="lable" for="Female">2nd Class</label>
+         <input class="radio" type="radio" id="3class" name="Class" value=3>
+        <label id="lable" for="Female">3rd Class</label><br><br>
+          <label id='lable' for="Parch">Parent&children</label><br>
+         <input id='box' type="number" name="pch" placeholder="Enter your family members" required><br><br>
+          <label id='lable' for="sibling">Siblings</label><br>
+         <input id='box' type="number" name="sib" placeholder="Enter your family" required><br><br><br>
+         <button id="button" type="submit" value="Predict">Predict</button>
+     </form>
+     </div>
+</body>
+</html>
